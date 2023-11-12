@@ -1,5 +1,6 @@
 from project import db, app
 import re
+from flask import Markup
 
 
 # Book model
@@ -13,11 +14,11 @@ class Book(db.Model):
     status = db.Column(db.String(20), default='available')
 
     def __init__(self, name, author, year_published, book_type, status='available'):
-        self.name = name
-        self.author = author
-        self.year_published = year_published
-        self.book_type = book_type
-        self.status = status
+        self.name = Markup.escape(name)
+        self.author = Markup.escape(author)
+        self.year_published = Markup.escape(year_published)
+        self.book_type = Markup.escape(book_type)
+        self.status = Markup.escape(status)
 
     def __repr__(self):
         return f"Book(ID: {self.id}, Name: {self.name}, Author: {self.author}, Year Published: {self.year_published}, Type: {self.book_type}, Status: {self.status})"
