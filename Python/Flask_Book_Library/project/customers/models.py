@@ -1,5 +1,5 @@
 from project import db, app
-
+from flask import Markup
 
 # Customer model
 class Customer(db.Model):
@@ -10,9 +10,9 @@ class Customer(db.Model):
     age = db.Column(db.Integer)
 
     def __init__(self, name, city, age):
-        self.name = name
-        self.city = city
-        self.age = age
+        self.name = Markup.escape(name)
+        self.city = Markup.escape(city)
+        self.age = Markup.escape(age)
 
     def __repr__(self):
         return f"Customer(ID: {self.id}, Name: {self.name}, City: {self.city}, Age: {self.age})"
